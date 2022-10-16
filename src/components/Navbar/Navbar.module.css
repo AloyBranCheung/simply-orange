@@ -1,0 +1,10 @@
+.container {
+  background-color: var(--green-brand);
+  height: 11vh;
+  padding: 1.25rem;
+}
+
+.container h1 {
+  font-family: "Kaushan Script", cursive;
+  color: white;
+}
