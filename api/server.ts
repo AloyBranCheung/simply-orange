@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import pricingRoute from "./routes/pricingRoute";
 
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 const url = process.env.MONGOURL;
@@ -25,7 +26,7 @@ app.get("/", (req, res) => {
   res.send("Hello from the server :)");
 });
 
-app.listen(3001, () => {
-  console.log("Server started on port 3001");
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}.`);
   connectMongo();
 });
