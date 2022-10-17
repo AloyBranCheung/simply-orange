@@ -24,7 +24,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 export default function InputPriceForm() {
-  const [isSuccessful, setIsSuccessful] = useState(true);
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [company, setCompany] = useState("");
   const [date, setDate] = useState<Moment | null>(moment);
@@ -126,7 +126,7 @@ export default function InputPriceForm() {
           {/* price input component */}
           <TextField
             required
-            inputProps={{ type: "number" }}
+            inputProps={{ type: "number", step: "0.01" }}
             id="outlined-basic"
             label="Price"
             onChange={handlePrice}

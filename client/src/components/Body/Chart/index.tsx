@@ -1,52 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import axios from "axios";
 
-// chart options
-const options = {
-  title: {
-    text: "Simply Orange History",
-  },
-  xAxis: {
-    title: {
-      text: "Dates",
-    },
-    type: "datetime",
-    min: Date.UTC(2022, 8, 15),
-    max: Date.UTC(2022, 8, 22),
-  },
-  series: [
-    {
-      name: "Loblaws",
-      data: [
-        [Date.UTC(2022, 8, 15), 5.9],
-        [Date.UTC(2022, 8, 16), 6.5],
-        [Date.UTC(2022, 8, 17), 7.9],
-      ],
-    },
-    {
-      name: "T&T",
-      data: [
-        [Date.UTC(2022, 8, 17), 5.9],
-        [Date.UTC(2022, 8, 25), 6.5],
-        [Date.UTC(2022, 8, 27), 3.9],
-      ],
-    },
-    {
-      name: "Farm Boy",
-      data: [
-        [Date.UTC(2022, 8, 15), 5.9],
-        [Date.UTC(2022, 8, 18), 7.0],
-        [Date.UTC(2022, 8, 21), 9.0],
-      ],
-    },
-  ],
-};
+interface PricePoint {
+  _id: string;
+  company: string;
+  date: string;
+  price: string;
+}
 
 export default function Chart() {
+  const [sortedData, setSortedData] = useState(new Map());
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://simply-orange.herokuapp.com/api/pricinghistory"
+        );
+
+        const groupedByCompany = new Map();
+
+        for (let point of data) {
+          if (!groupedByCompany.get(point.company)) {
+            groupedByCompany.set(point.company, [point]);
+          } else {
+            groupedByCompany.get(point.company).push(point);
+          }
+        }
+
+        groupedByCompany.forEach((value, key) => {
+          const datePriceArr = [];
+          for (let arr of value) {
+            const tempArr = [];
+            const date = new Date(arr.date).getTime();
+            // const stringArr = arr.date.split("-");
+            // const newDate = `${stringArr[0]}-${stringArr[1]}-${
+            //   stringArr[2].split("T")[0]
+            // }`;
+            tempArr.push(date, arr.price);
+            datePriceArr.push(tempArr);
+          }
+          groupedByCompany.set(key, datePriceArr);
+        });
+
+        setSortedData(groupedByCompany);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // chart options
+  const options = {
+    title: {
+      text: "Simply Orange History",
+    },
+    yAxis: {
+      title: {
+        text: "Price ($)",
+      },
+    },
+    xAxis: {
+      title: {
+        text: "Dates",
+      },
+      type: "datetime",
+    },
+    series: [
+      {
+        name: "Loblaws",
+        data: sortedData.get("loblaws"),
+      },
+      {
+        name: "T&T",
+        data: sortedData.get("t&t"),
+      },
+      {
+        name: "Farm Boy",
+        data: sortedData.get("farmBoy"),
+      },
+    ],
+  };
+
   return (
     <Card sx={{ width: "100%", maxWidth: "800px" }}>
       <CardHeader title="Price History Graph" />
