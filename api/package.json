@@ -1,11 +1,17 @@
 {
   "name": "api",
+  "engines": {
+    "node": "16.15.1"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/server.js",
+    "postinstall": "tsc",
+    "dev": "nodemon server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deployHeroku": "git add . && git commit -m Heroku && git push heroku main"
   },
   "keywords": [],
   "author": "",
