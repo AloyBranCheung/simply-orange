@@ -1,0 +1,10 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 15px;
+  box-shadow: 2px 4px 15px black;
+  z-index: 10;
+}

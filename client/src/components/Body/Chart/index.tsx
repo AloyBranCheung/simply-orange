@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import styles from "./Chart.module.css";
 
 // chart options
 const options = {
@@ -37,7 +36,7 @@ const options = {
       ],
     },
     {
-      name: "Farmboy",
+      name: "Farm Boy",
       data: [
         [Date.UTC(2022, 8, 15), 5.9],
         [Date.UTC(2022, 8, 18), 7.0],
@@ -49,7 +48,7 @@ const options = {
 
 export default function Chart() {
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "100%", maxWidth: "800px" }}>
       <CardHeader title="Price History Graph" />
       <CardContent>
         <HighchartsReact highcharts={Highcharts} options={options} />

@@ -1,12 +1,11 @@
 .container {
-  height: 100vh;
   width: 100%;
   background-color: var(--orange-brand);
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
-  padding: 12.5rem;
+  padding: 1.25rem;
 }
