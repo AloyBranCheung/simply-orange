@@ -6,13 +6,6 @@ import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
 
-interface PricePoint {
-  _id: string;
-  company: string;
-  date: string;
-  price: string;
-}
-
 export default function Chart() {
   const [sortedData, setSortedData] = useState(new Map());
   useEffect(() => {
