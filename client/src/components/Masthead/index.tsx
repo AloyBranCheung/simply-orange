@@ -18,14 +18,16 @@ export default function Masthead() {
         <div className={styles.wave}></div>
       </div>
       {/* <div className={styles.liquid}></div> */}
-      <SearchBar />
-      <Button
-        sx={{ backgroundColor: "var(--green-brand)" }}
-        type="submit"
-        variant="contained"
-      >
-        Submit
-      </Button>
+      <div className={styles.inputContainer}>
+        <SearchBar />
+        <Button
+          sx={{ backgroundColor: "var(--green-brand)" }}
+          type="submit"
+          variant="contained"
+        >
+          Submit
+        </Button>
+      </div>
     </form>
   );
 }
