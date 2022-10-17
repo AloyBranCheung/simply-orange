@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment, { Moment } from "moment";
+import axios from "axios";
 
 export default function InputPriceForm() {
   const [company, setCompany] = useState("");
@@ -36,9 +37,13 @@ export default function InputPriceForm() {
   };
 
   // Form submit
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(price, company, date);
+    try {
+      const { data } = await axios.get("pricinghistory");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
