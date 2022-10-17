@@ -40,7 +40,11 @@ export default function InputPriceForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("pricinghistory");
+      // change to POST
+      const { data } = await axios.get(
+        "https://simply-orange.herokuapp.com/api/pricinghistory"
+      );
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
