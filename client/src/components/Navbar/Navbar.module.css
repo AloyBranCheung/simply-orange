@@ -1,10 +1,11 @@
 .container {
   background-color: var(--green-brand);
-  height: 11vh;
-  padding: 1.25rem;
+  height: 7vh;
+  z-index: 20;
+  padding: 10px;
 }
 
-.container h1 {
-  font-family: "Kaushan Script", cursive;
-  color: white;
+.container img {
+  max-width: 100%;
+  max-height: 100%;
 }
