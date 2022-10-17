@@ -6,8 +6,12 @@ import PurchaseHistory from "./PurchaseHistory";
 export default function Body() {
   return (
     <section className={styles.container}>
-      <Chart />
-      <PurchaseHistory />
+      <div className={styles.sectionWrapper}>
+        <Chart />
+      </div>
+      <div className={styles.sectionWrapper}>
+        <PurchaseHistory />
+      </div>
     </section>
   );
 }
