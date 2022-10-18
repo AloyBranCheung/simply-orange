@@ -5,7 +5,6 @@ import CardHeader from "@mui/material/CardHeader";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
-import moment from "moment";
 
 export default function Chart() {
   const [sortedData, setSortedData] = useState(new Map());
