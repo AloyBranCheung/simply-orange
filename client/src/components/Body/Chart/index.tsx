@@ -29,7 +29,7 @@ export default function Chart() {
           const datePriceArr = [];
           for (let arr of value) {
             const tempArr = [];
-            const date = new Date(arr.date).getTime();
+            const date = arr.date.replace(/-/g, "/").replace(/T.+/, "");
             // const stringArr = arr.date.split("-");
             // const newDate = `${stringArr[0]}-${stringArr[1]}-${
             //   stringArr[2].split("T")[0]
