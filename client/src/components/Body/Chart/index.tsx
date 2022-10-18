@@ -5,7 +5,13 @@ import CardHeader from "@mui/material/CardHeader";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
-import moment from "moment";
+
+interface dataPoints {
+  _id: string;
+  date: Date;
+  price: number;
+  company: string;
+}
 
 export default function Chart() {
   const [sortedData, setSortedData] = useState(new Map());
@@ -28,7 +34,12 @@ export default function Chart() {
 
         groupedByCompany.forEach((value, key) => {
           const datePriceArr = [];
-          for (let arr of value) {
+          const sortedArr = value.sort(
+            (a: dataPoints, b: dataPoints) =>
+              new Date(b.date).valueOf() - new Date(a.date).valueOf()
+          );
+          console.log(sortedArr);
+          for (let arr of sortedArr) {
             const tempArr = [];
             const strArr = arr.date.split("-");
             const year = strArr[0];
