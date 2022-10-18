@@ -5,6 +5,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import axios from "axios";
+import moment from "moment";
 
 export default function Chart() {
   const [sortedData, setSortedData] = useState(new Map());
@@ -29,12 +30,11 @@ export default function Chart() {
           const datePriceArr = [];
           for (let arr of value) {
             const tempArr = [];
-            const date = arr.date.replace(/-/g, "/").replace(/T.+/, "");
-            // const stringArr = arr.date.split("-");
-            // const newDate = `${stringArr[0]}-${stringArr[1]}-${
-            //   stringArr[2].split("T")[0]
-            // }`;
-            tempArr.push(date, arr.price);
+            const strArr = arr.date.split("-");
+            const year = strArr[0];
+            const month = strArr[1] - 1;
+            const day = strArr[2].split("T")[0] - 1;
+            tempArr.push(Date.UTC(year, month, day), arr.price);
             datePriceArr.push(tempArr);
           }
           groupedByCompany.set(key, datePriceArr);
